@@ -4,10 +4,44 @@
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <style>
-            .container {
-                padding: 20px;
-                border: 1px solid #ccc;
+            .full-container{
+                margin: 15px 0; /* Uniform top and bottom margins*/
+                width:90vw;
+                height:valc(80vh - 30px); /* Adjusts the height taking into account the margins */
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform: translate(-50%, -50%);
+                overflow: hidden;
+                border-radius: 35px;
+                box-shadow: 4px 0 8px rgba(0,0,0,0.5);
+                background-color:white;
+            }
+            .upper-container{
+                display:flex;
+                height: 60%;
+                overflow: hidden;
+                justify-content: center;
+                align-items: center;
+            }
+            .lower-container{
+                height: 40%;
+                overflow: hidden;
+                display:flex;
+            }
+            .lower-left, .lower-right{
+                width: 50%;
+                overflow: hidden;
+            }
+            .lower-right{
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 text-align: center;
+            }
+            img{
+                max-width: 100%;
+                max-height: 100%;
             }
         </style>
     </head>
@@ -33,24 +67,34 @@
                 </div>
             </div>
         </nav>
-        <div style="display:flex; flex-direction:row; margin:auto">
-            <div class="card" style="width: 60%;">
-                <img class="card-img-top" src="/static/graphic_files/2CV.jpg" alt="Card image">
+        <div class="full-container">
+            <div class="upper-container">
+                <img class = "img-fluid" 
+                    src="/static/graphic_files/cars.jpeg" 
+                    alt="Image of Dealerships' parking area"  
+                    style="object-fit:contain">
             </div>
-            <div class="card container" style="width: 30%; align-items:center">
-                    <div class = "title">Headquarter</div>
-                    <div style="margin-bottom: 20px; font-size:20px"> <strong>Dealerships</strong><br>
-                        La Pacoule jolie<br>
-                        16, Impasse du fond du champ<br>
-                        23999 CUCURRON LES OLIVETTES<br>
-                        FRANCE
-                    </div>
-                    <div style="margin-bottom: 20px">
-                        <strong>Phone:</strong> +33 1 23 45 67 89
-                    </div>
-                    <div style="margin-bottom: 20px">
-                        <strong>e-mail:</strong> contact.dealerships@dealerships.com
-                    </div>
+            <div class="lower-container">
+                <div class="lower-left border">
+                    <img class="img-fluid" 
+                        src="/static/graphic_files/contactus.png" 
+                        alt="Image of hotline call signage"
+                        style="object-fit:contain">
+                </div>
+                <div class="lower-right border">
+                        <div style="margin-bottom: 20px; font-size:20px;color:blue"> 
+                            <strong>Contact Customer Service</strong><br>
+                            support@bestcars.com<br>
+                            <strong>Contact our National Advertising Team</strong><br>
+                            NationalSales@bestcars.com<br>
+                            <strong>Contact our Public Relations team</strong><br>
+                            PR@bestcars.com<br>
+                            <strong>Contact the bestcars.com offices</strong><br>
+                            312-011-1111<br>
+                            <strong>Become a bestcars.com car dealer</strong><br>
+                            <strong>Visit growwithbestcars.com</strong>
+                        </div>
+                </div>
             </div>
         </div>
     </body>
