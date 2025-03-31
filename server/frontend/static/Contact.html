@@ -20,9 +20,15 @@
             .upper-container{
                 display:flex;
                 height: 50%;
+                /*position: relative;*/
                 overflow: hidden;
                 justify-content: center;
                 align-items: center;
+                /*top:0px;
+                right: 0px;
+                left: 0px;
+                bottom: 0px;*/
+                border: 5px solid green;
             }
             .lower-container{
                 height: 50%;
@@ -34,13 +40,32 @@
                 width: 50%;
                 overflow: hidden;
             }
-            .lower-left::after {
-                content: '';
-                position: absolute;
+            .lower-left{
+                top:0px;
+                right: 0px;
+                left: 0px;
+                border-right: 5px dashed yellow;
+                border-left: 5px dashed green;
+                border-top: 5px dashed black;
+
+            }
+            .lower-left-inner{
+                display: flex;
+                height: 80%;
+                width : 100%;
+                position: relative;
                 top: 10%;
+                left: 0%;
+                /*transform: translate(-50%, -50%);*/
+                right: 0%;
                 bottom: 10%;
-                right: 0;
-                border-right: 5px solid blue; /* Bordure visible uniquement à droite */
+                border-right: 5px solid blue;
+                border-left: 5px solid red;
+                border-top: 5px solid green;
+                border-bottom: 5px solid green;
+                justify-content : center;
+                align-items: center;
+                object-fit: contain;
             }
             .lower-right{
                 display: flex;
@@ -52,8 +77,18 @@
             }
             img{
                 max-width: 100%;
-                max-height: 80%;
-                object-fit: contain;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                /*object-fit: contain;*/
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
+                border-right: 5px solid black;
+                border-left: 5px solid black;
+                border-top: 5px solid black;
+                border-bottom: 5px solid black;
             }
         </style>
     </head>
@@ -88,10 +123,12 @@
             </div>
             <div class="lower-container">
                 <div class="lower-left">
-                    <img class="img-fluid" 
-                        src="/static/graphic_files/contactus.png" 
-                        alt="Image of hotline call signage"
-                        style="object-fit:contain">
+                    <div class="lower-left-inner">
+                        <img class="img-fluid" 
+                            src="/static/graphic_files/contactus.png" 
+                            alt="Image of hotline call signage"
+                            style="object-fit:contain">
+                    </div>
                 </div>
                 <div class="lower-right">
                     <div style="font-size: 20px; color: blue;">
