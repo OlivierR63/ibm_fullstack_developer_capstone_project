@@ -7,7 +7,7 @@
             .full-container{
                 margin: 15px 0; /* Uniform top and bottom margins*/
                 width:90vw;
-                height:valc(80vh - 30px); /* Adjusts the height taking into account the margins */
+                height:calc(80vh - 30px); /* Adjusts the height taking into account the margins */
                 position:absolute;
                 top:50%;
                 left:50%;
@@ -19,29 +19,41 @@
             }
             .upper-container{
                 display:flex;
-                height: 60%;
+                height: 50%;
                 overflow: hidden;
                 justify-content: center;
                 align-items: center;
             }
             .lower-container{
-                height: 40%;
+                height: 50%;
                 overflow: hidden;
                 display:flex;
+                position:relative;
             }
             .lower-left, .lower-right{
                 width: 50%;
                 overflow: hidden;
+            }
+            .lower-left::after {
+                content: '';
+                position: absolute;
+                top: 10%;
+                bottom: 10%;
+                right: 0;
+                border-right: 5px solid blue; /* Bordure visible uniquement à droite */
             }
             .lower-right{
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+                overflow: hidden;
+                padding: 10px 0;
             }
             img{
                 max-width: 100%;
-                max-height: 100%;
+                max-height: 80%;
+                object-fit: contain;
             }
         </style>
     </head>
@@ -75,25 +87,25 @@
                     style="object-fit:contain">
             </div>
             <div class="lower-container">
-                <div class="lower-left border">
+                <div class="lower-left">
                     <img class="img-fluid" 
                         src="/static/graphic_files/contactus.png" 
                         alt="Image of hotline call signage"
                         style="object-fit:contain">
                 </div>
-                <div class="lower-right border">
-                        <div style="margin-bottom: 20px; font-size:20px;color:blue"> 
-                            <strong>Contact Customer Service</strong><br>
-                            support@bestcars.com<br>
-                            <strong>Contact our National Advertising Team</strong><br>
-                            NationalSales@bestcars.com<br>
-                            <strong>Contact our Public Relations team</strong><br>
-                            PR@bestcars.com<br>
-                            <strong>Contact the bestcars.com offices</strong><br>
-                            312-011-1111<br>
-                            <strong>Become a bestcars.com car dealer</strong><br>
-                            <strong>Visit growwithbestcars.com</strong>
-                        </div>
+                <div class="lower-right">
+                    <div style="font-size: 20px; color: blue;">
+                        <strong>Contact Customer Service</strong><br>
+                        support@bestcars.com<br>
+                        <strong>Contact our National Advertising Team</strong><br>
+                        NationalSales@bestcars.com<br>
+                        <strong>Contact our Public Relations team</strong><br>
+                        PR@bestcars.com<br>
+                        <strong>Contact the bestcars.com offices</strong><br>
+                        312-011-1111<br>
+                        <strong>Become a bestcars.com car dealer</strong><br>
+                        <strong>Visit growwithbestcars.com</strong>
+                    </div>
                 </div>
             </div>
         </div>
