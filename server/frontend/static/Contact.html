@@ -20,15 +20,9 @@
             .upper-container{
                 display:flex;
                 height: 50%;
-                /*position: relative;*/
                 overflow: hidden;
                 justify-content: center;
                 align-items: center;
-                /*top:0px;
-                right: 0px;
-                left: 0px;
-                bottom: 0px;*/
-                border: 5px solid green;
             }
             .lower-container{
                 height: 50%;
@@ -41,31 +35,20 @@
                 overflow: hidden;
             }
             .lower-left{
-                top:0px;
-                right: 0px;
-                left: 0px;
-                border-right: 5px dashed yellow;
-                border-left: 5px dashed green;
-                border-top: 5px dashed black;
-
-            }
-            .lower-left-inner{
                 display: flex;
-                height: 80%;
-                width : 100%;
-                position: relative;
-                top: 10%;
-                left: 0%;
-                /*transform: translate(-50%, -50%);*/
-                right: 0%;
-                bottom: 10%;
-                border-right: 5px solid blue;
-                border-left: 5px solid red;
-                border-top: 5px solid green;
-                border-bottom: 5px solid green;
                 justify-content : center;
                 align-items: center;
                 object-fit: contain;
+            }
+            .lower-left-inner{
+                display: flex;
+                height: 90%;
+                width : 100%;
+                position: relative;
+                justify-content : center;
+                align-items: center;
+                object-fit: contain;
+                border-right: 5px solid blue;
             }
             .lower-right{
                 display: flex;
@@ -77,18 +60,13 @@
             }
             img{
                 max-width: 100%;
-                max-height: 100%;
                 width: auto;
-                height: auto;
-                /*object-fit: contain;*/
-                top: 0px;
-                bottom: 0px;
-                left: 0px;
-                right: 0px;
-                border-right: 5px solid black;
-                border-left: 5px solid black;
-                border-top: 5px solid black;
-                border-bottom: 5px solid black;
+                height: 100%;
+            }
+            .upper-container img{
+                max-width: 100%;
+                width: auto;
+                height: 90%;
             }
         </style>
     </head>
