@@ -24,7 +24,6 @@ urlpatterns = [
     # path for add a review view
     path(route='add_review', view=views.add_review, name='add_review'),
     
-
     # path for list the cars
     path(route='get_cars', view=views.get_cars, name ='getcars'),
     
