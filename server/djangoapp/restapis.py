@@ -17,8 +17,11 @@ def get_request(endpoint, **kwargs):
         for key,value in kwargs.items():
             params=params+key+"="+value+"&"
 
-    request_url = backend_url+"/"+endpoint+"?"+params
+    request_url = backend_url+endpoint+"?"+params
 
+    #print(f'backend_url = {backend_url}')
+    #print(f'endpoint = {endpoint}')
+    #print(f'params = |{params}|')
     print("GET from {} ".format(request_url))
     try:
         # Call get method of requests library with URL and parameters
