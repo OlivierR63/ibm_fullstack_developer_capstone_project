@@ -48,14 +48,14 @@ class CarModel(models.Model):
     year = models.IntegerField(
                                 validators=[MinValueValidator(2015),
                                 MaxValueValidator(2023)]
-                                )
-    
+                            )
+
     # Other field
     price = models.DecimalField(
-                                max_digits=10,
-                                decimal_places=2,
-                                null=True, 
-                                blank=True
+                                    max_digits=10,
+                                    decimal_places=2,
+                                    null=True,
+                                    blank=True
                                 )
     mileage = models.PositiveIntegerField(
                                             null=True,
@@ -63,4 +63,7 @@ class CarModel(models.Model):
                                         )
 
     def __str__(self):
-        return f"{self.year} {self.car_make.name} {self.name} {self.get_type_display()}"
+        return (
+                f"{self.year} {self.car_make.name} "
+                f"{self.name} {self.get_type_display()}"
+                )
