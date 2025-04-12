@@ -46,9 +46,11 @@ class CarModel(models.Model):
                             choices=CAR_TYPE_CHOICES
                             )
     year = models.IntegerField(
-                                validators=[MinValueValidator(2015),
-                                MaxValueValidator(2023)]
-                            )
+                                validators=[
+                                            MinValueValidator(2015),
+                                            MaxValueValidator(2023)
+                                            ]
+                                )
 
     # Other field
     price = models.DecimalField(

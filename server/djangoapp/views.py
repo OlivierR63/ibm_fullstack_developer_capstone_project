@@ -10,7 +10,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .restapis import get_request, post_review
+from .restapis import get_request
 
 
 # Get an instance of a logger
@@ -37,7 +37,7 @@ def login_user(request):
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
     logout(request)
-    data={"username":""}
+    data = {"username": ""}
     return JsonResponse(data)
 
 
@@ -78,7 +78,7 @@ def registration(request):
         return JsonResponse(data)
 
 
-# Update the `get_dealerships` render list of dealerships all by default, 
+# Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
 def get_dealerships(request, state="All"):
     if (state == "All"):
@@ -110,17 +110,19 @@ def get_dealer_details(request, dealer_id):
 
 
 # Create a `add_review` view to submit a review
-def add_review(request): 
+def add_review(request):
     if (request.user.is_anonymous is False):
-        data = json.loads(request.body)
         try:
             return JsonResponse({"status": 200})
 
         except Exception as err:
             print(f"Unexpected {err=}, {type(err)=}")
-            return JsonResponse({"status": 401,
-                                "message": "Error in posting review"
-                                })
+            return JsonResponse(
+                                    {
+                                        "status": 401,
+                                        "message": "Error in posting review"
+                                    }
+                                )
     else: 
         return JsonResponse({"status": 403,
                             "message": "Unauthorized"
@@ -128,7 +130,7 @@ def add_review(request):
 
 
 # Create a 'get_cars' view, in order to get the list of cars
-def get_cars(request): 
+def get_cars(request):
     count = CarMake.objects.filter().count()
 
     if (count == 0):
@@ -136,10 +138,10 @@ def get_cars(request):
 
     car_models = CarModel.objects.select_related('car_make')
     cars = []
-    for car_model in car_models: 
+    for car_model in car_models:
         cars.append(
                         {
-                            "CarModel": car_model.name, 
+                            "CarModel": car_model.name,
                             "CarMake": car_model.car_make.name
                         }
                     )
