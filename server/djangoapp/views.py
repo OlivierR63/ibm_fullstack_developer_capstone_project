@@ -123,10 +123,13 @@ def add_review(request):
                                         "message": "Error in posting review"
                                     }
                                 )
-    else: 
-        return JsonResponse({"status": 403,
-                            "message": "Unauthorized"
-                            })
+    else:
+        return JsonResponse(
+                                {
+                                    "status": 403,
+                                    "message": "Unauthorized"
+                                }
+                            )
 
 
 # Create a 'get_cars' view, in order to get the list of cars

@@ -33,7 +33,7 @@ subdomain = 'olivierrocha-8000.'
 domain = 'theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
 url_address = protocol + subdomain + domain
 ALLOWED_HOSTS = ['localhost', url_address]
-CSRF_TRUSTED_ORIGINS=[url_address]
+CSRF_TRUSTED_ORIGINS = [url_address]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
