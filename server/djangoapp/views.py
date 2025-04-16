@@ -10,7 +10,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .restapis import get_request, analyze_review_sentiments, post_review
+from .restapis import get_request, post_review
 
 
 # Get an instance of a logger
@@ -113,10 +113,8 @@ def get_dealer_details(request, dealer_id):
 def add_review(request):
     if (request.user.is_anonymous is False):
         data = json.loads(request.body)
-        print(f"data = {data}")
         try:
             response = post_review(data)
-            print(f"response = {response}")
             return JsonResponse({"status": 200})
 
         except Exception as err:
