@@ -95,7 +95,7 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   const review = new Reviews({
 		"id": new_id,
 		"name": data.name,
-		"dealership": data.dealerships,
+		"dealership": data.dealership,
 		"review": data.review,
 		"purchase": data.purchase,
 		"purchase_date": data.purchase_date,

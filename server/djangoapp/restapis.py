@@ -44,8 +44,9 @@ def analyze_review_sentiments(text):
 def post_review(data_dict):
     request_url = backend_url + "/insert_review"
     try:
+        print(f"request_url = {request_url}")
         response = requests.post(request_url, json=data_dict)
-        print(response.json())
+        print(f"Function post_review: response.json = {response.json()}")
         return response.json()
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
