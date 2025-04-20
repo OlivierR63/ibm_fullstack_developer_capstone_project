@@ -108,7 +108,7 @@ const PostReview = () => {
                 </div >
 
                 <div className='input_field'>
-                    Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
+                    Car Year <input type="number" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
                 </div>
 
                 <div>
