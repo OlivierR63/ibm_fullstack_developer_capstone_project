@@ -10,7 +10,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .restapis import get_request, post_review, analyze_review_sentiments
+from .restapis import get_request, post_review, analyze_review_sentiments, searchcars_request
 
 
 # Get an instance of a logger
@@ -159,3 +159,8 @@ def get_cars(request):
                     )
 
     return JsonResponse({"CarModels": cars})
+
+
+def get_inventory(request):
+
+    return JsonResponse(cars_list)

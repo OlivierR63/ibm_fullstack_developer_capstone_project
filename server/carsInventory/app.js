@@ -10,22 +10,25 @@ const port = 3050;
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
-const carsData = JSON.parse(fs.readFileSync('car_records.json'));
-mongoose.connect('mongodb://mongodb:27017/', {dbName: 'dealsershipDB'})
-        .then(() => console.log('MongoDB connected'))
-        .catch(err => console.error('MongoDB connection error:', err));
-
 const Cars = require('./inventory');
+const carsData = JSON.parse(fs.readFileSync('car_records.json'));
 
-try {
-    Cars.deleteMany({})
-        .then(() => {
-            Cars.insertMany(carsData.cars);
-    });
-}
-catch(error){
-    console.error(error);
-};
+mongoose.connect('mongodb://mongo_db:27017/', {dbName: 'dealershipsDB'})
+        .then(async () => {
+            console.log('MongoDB connected');
+
+            try {
+                await Cars.deleteMany({});
+                await Cars.insertMany(carsData.cars);
+                console.log('Initial data inserted');
+            }
+            catch(error){
+                console.error('Error initializing database:', error);
+            }
+        })
+        .catch(err => {
+            console.error('MongoDB connection error:', err);
+        });
 
 app.get('/', async (req, res) => {
     res.send('Welcome to the Mongoose API');
