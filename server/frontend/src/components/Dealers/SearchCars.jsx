@@ -238,6 +238,48 @@ const SearchCars = () => {
 
     return(
         <div>
+            <Header />
+            <h1 style={{ marginBottom: '20px'}}>Cars at {dealer.full_name}</h1>
+            <div>
+                <span style={
+                                { 
+                                    marginLeft: '10px',
+                                    paddingLeft: '10px'
+                                }
+                            }>
+                    Make
+                </span>
+                <select 
+                    style = {
+                                {
+                                    marginLeft: '10px',
+                                    marginRight: '10px',
+                                    paddingLeft: '10px',
+                                    borderRadius: '10px'
+                                }
+                            }
+                            name="make"
+                            id="make"
+                            onChange={SearchCarsByMake}
+                >
+                    {
+                        makes.length === 0? (
+                            <option value=''>No data found</option>
+                        ):(
+                            <>
+                                <option disabled defaultValue> -- All --</option>
+                                {makes.map((make, index) => (
+                                    <option key={index} value={make}>
+                                        {make}
+                                    </option>
+                                ))}
+                            </>
+                        )
+                    }
+                </select>
+
+
+            </div>
             
         </div>
     );
