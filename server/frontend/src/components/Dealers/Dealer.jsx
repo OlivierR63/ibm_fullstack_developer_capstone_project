@@ -80,6 +80,9 @@ const Dealer = () => {
                     {dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} 
                 </h4>
             </div>
+
+            <a href={`/searchcars/${id}`}>Search Cars</a>
+
             <div class="reviews_panel">
                 {reviews.length === 0 && unreviewed === false ? 
                     ( <text>Loading Reviews....</text> ):  

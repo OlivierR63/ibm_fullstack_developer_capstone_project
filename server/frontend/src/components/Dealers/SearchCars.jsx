@@ -13,8 +13,8 @@ const SearchCars = () => {
     let params = useParams();
     let id = params.id;
 
-    let dealer_url = '/djangoapp/get_inventory/${id}';
-    let fetch_url = '/djangoapp/dealer/${id}';
+    let dealer_url = `/djangoapp/get_inventory/${id}`;
+    let fetch_url = `/djangoapp/dealer/${id}`;
 
     const fetchDealer = async () => {
         const res = await fetch(fetch_url, {
@@ -91,7 +91,7 @@ const SearchCars = () => {
             let currmileage = parseInt(document.getElementById('mileage').value);
 
             if(currmileage === 50000){
-                cars = cars.filter(car => car.mileage <= mileage)
+                cars = cars.filter(car => car.mileage <= currmileage)
             } else if (currmileage === 100000){
                 cars = cars.filter(car => car.mileage >50000 && car.mileage <= currmileage);
             } else if (currmileage === 150000){
@@ -285,3 +285,5 @@ const SearchCars = () => {
     );
     
 };
+
+export default SearchCars;
