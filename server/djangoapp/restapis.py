@@ -16,14 +16,14 @@ searchcars_url = os.getenv(
     'searchcars_url',
     default="http://localhost:3050/")
 
+
 def get_request(endpoint, **kwargs):
     params = ""
     if (kwargs):
         for key, value in kwargs.items():
             params = params + key + "=" + value + "&"
 
-        #request_url = backend_url + endpoint + "?" + params
-    request_url = backend_url + endpoint
+    request_url = backend_url + endpoint + "?" + params
 
     print(f"GET from {request_url}")
     try:
