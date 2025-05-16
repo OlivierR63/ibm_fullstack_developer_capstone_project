@@ -17,13 +17,16 @@ const SearchCars = () => {
     let fetch_url = `/djangoapp/dealer/${id}`;
 
     const fetchDealer = async () => {
+        console.log(`Dans SearchCars.jsx, fetch_url = ${fetch_url}`);
         const res = await fetch(fetch_url, {
             method: "GET"
         });
 
-        const retobj = await res.json;
+        const retobj = await res.json();
+        console.log(`Dans SearchCars.jsx, retobj.status = ${retobj.status}`);
         if (retobj.status === 200) {
             let dealer = retobj.dealer;
+            console.log(`Dans SearchCars.jsx, dealer = ${dealer} et dealer[0].full_name=${dealer[0].full_name}`);
             setDealer({"full_name": dealer[0].full_name});
         }
     };
@@ -32,6 +35,7 @@ const SearchCars = () => {
     const populateMakesAndModels = (cars)=>{
         let tmpmakes = [];
         let tmpmodels = [];
+        console.log(`Appel de populateMakesAndModel et cars=${cars}`);
         cars.forEach((car)=>{
             tmpmakes.push(car.make);
             tmpmodels.push(car.model);
@@ -46,9 +50,11 @@ const SearchCars = () => {
             method: "GET"
         });
         const retobj = await res.json();
+        console.log(`Appel de fetchCars : retobj = ${retobj} et retobj.status = ${retobj.status}`);
 
         if (retobj.status === 200){
             let cars = Array.from(retobj.cars);
+            console.log(`Dans SearchCars.jsx, cars = ${cars} et cars.length()=${cars.length}`);
             setCars(cars);
             populateMakesAndModels(cars);
         };
@@ -74,7 +80,7 @@ const SearchCars = () => {
             let currmodel = document.getElementById('model').value;
             cars = cars.filter(car => car.model === currmodel);
             if(cars.length !== 0){
-                document.getELementById('make').value = cars[0].make;
+                document.getElementById('make').value = cars[0].make;
             }
         }
 
@@ -83,7 +89,7 @@ const SearchCars = () => {
             cars = cars.filter(car => car.year === curryear);
 
             if (cars.length !== 0){
-                document.getELementById('make').value =cars[0].make;
+                document.getElementById('make').value =cars[0].make;
             }
         }
 
@@ -234,6 +240,7 @@ const SearchCars = () => {
     useEffect(() => {
         fetchCars();
         fetchDealer();
+        console.log(`Appel de useEffect et dealer = ${dealer}`);
     }, []);
 
     return(
