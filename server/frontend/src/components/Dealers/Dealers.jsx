@@ -32,9 +32,7 @@ const Dealers = () => {
     // Function to retrieve dealers from the API
     const get_dealers = useCallback(async ()=>{
         const res = await fetch(dealer_url, {method: "GET"});
-        console.log(`dealer_url = ${dealer_url}`);
         const retobj = await res.json();
-        console.log(`retobj = ${retobj} et retobj.status = ${retobj.status} et retobj.dealers = ${retobj.dealers}`);
 
         if(retobj.status === 200) {
             const all_dealers = Array.from(retobj.dealers);

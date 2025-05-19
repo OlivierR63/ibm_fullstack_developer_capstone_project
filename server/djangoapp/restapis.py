@@ -29,7 +29,6 @@ def get_request(endpoint, **kwargs):
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
-        print(f'reponse = {response}')
         return response.json()
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
@@ -65,7 +64,7 @@ def searchcars_request(endpoint, **kwargs):
 
     request_url = searchcars_url + endpoint + "?" + params
 
-    print("GET from {} ".format(request_url))
+    print(f"GET from {request_url}")
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)

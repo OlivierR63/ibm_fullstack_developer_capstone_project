@@ -36,11 +36,11 @@ app.get('/', async (req, res) => {
 
 app.get('/cars/:id', async (req, res) => {
     try{
-        const document = await Cars.find({dealers_id: req.params.id});
-        res.json(document);
+        const document = await Cars.find({dealer_id: req.params.id});
+        res.json(document); // Sends the JSON response and terminates the function
     } 
     catch(error){
-        res.status(500).json({error: 'Error fetching cars'});
+        res.status(500).json({error: 'Error fetching cars'}); //Sends an error message and terminates the function
     };
 });
 
@@ -95,7 +95,6 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
         if(price === 20000) {
             condition = { $lte : price}
         } else if (price=== 40000){
-            console.log("\n \n \n "+ price)  
             condition = { $lte : price, $gt : 20000}
         } else if (price === 60000){
             condition = { $lte : price, $gt : 40000}

@@ -85,15 +85,12 @@ def registration(request):
 # Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
 def get_dealerships(request, state="All"):
-    print(f'Dans get_dealerships : state = {state}')
     if (state == "All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/" + state
 
-    print(f'endpoint = {endpoint}')
     dealerships = get_request(endpoint)
-    print(f'dealerships = {dealerships}')
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 
