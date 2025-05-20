@@ -1,5 +1,7 @@
 # Uncomment the imports below before you add the function code
 import requests
+import inspect
+import json
 import os
 from dotenv import load_dotenv
 
@@ -29,8 +31,18 @@ def get_request(endpoint, **kwargs):
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
-        return response.json()
+        print(f"Raw response: {response.text}")  # Print raw response
+         # Check if the response is not empty and is a valid JSON
+        if response.text:
+            return response.json()
+        else:
+            print("Empty response received")
+            return None
+    except json.JSONDecodeError:
+        print("Response is not a valid JSON")
     except Exception as err:
+        current_function_name = inspect.currentframe().f_code.co_name
+        print(f"Unexpected error in {current_function_name}")
         print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
 
@@ -42,6 +54,8 @@ def analyze_review_sentiments(text):
         response = requests.get(request_url)
         return response.json()
     except Exception as err:
+        current_function_name = inspect.currentframe().f_code.co_name
+        print(f"Unexpected error in {current_function_name}")
         print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
 
@@ -52,6 +66,8 @@ def post_review(data_dict):
         response = requests.post(request_url, json=data_dict)
         return response.json()
     except Exception as err:
+        current_function_name = inspect.currentframe().f_code.co_name
+        print(f"Unexpected error in {current_function_name}")
         print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
 
@@ -70,5 +86,7 @@ def searchcars_request(endpoint, **kwargs):
         response = requests.get(request_url)
         return response.json()
     except Exception as err:
+        current_function_name = inspect.currentframe().f_code.co_name
+        print(f"Unexpected error in {current_function_name}")
         print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
