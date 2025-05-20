@@ -19,8 +19,9 @@ mongoose.connect('mongodb://mongo_db:27017/', {dbName: 'dealershipsDB'})
 
             try {
                 await Cars.deleteMany({});
-                await Cars.insertMany(carsData.cars);
-                console.log('Initial data inserted');
+                const insertedCars = await Cars.insertMany(carsData.cars);
+                console.log(`Initial data inserted: ${insertedCars.length} documents inserted`);
+                console.log('Inserted Cars:', insertedCars);
             }
             catch(error){
                 console.error('Error initializing database:', error);
@@ -46,7 +47,22 @@ app.get('/cars/:id', async (req, res) => {
 
 app.get('/carsbymake/:id/:make', async (req, res) => {
     try{
-        const document = await Cars.find({dealers_id: req.params.id, make: req.params.make});
+        const { id, make } = req.params;
+
+        if (!id || !make) {
+            return res.status(400).json({ error: 'Missing parameters: id and make are required' });
+        }
+
+        console.log(`Selection de la marque : req.params.make = ${make}`);
+        const document = await Cars.find({dealer_id: id, make: make});
+
+        console.log(`document trouve = ${document}`);
+
+        if (!document || document.length === 0) {
+            return res.status(404).json({ error: 'No cars found' });
+        }
+
+        console.log(`document jsonnise = ${res.json(document)}`);
         res.json(document);
     } 
     catch(error){
@@ -57,7 +73,7 @@ app.get('/carsbymake/:id/:make', async (req, res) => {
 
 app.get('/carsbymodel/:id/:model', async (req, res) => {
     try{
-        const document = await Cars.find({dealers_id: req.params.id, model: req.params.model});
+        const document = await Cars.find({dealer_id: req.params.id, model: req.params.model});
         res.json(document);
     } 
     catch(error){
@@ -81,7 +97,7 @@ app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
         } else {
           condition = { $gt : 200000}
         }
-        const documents = await Cars.find({ dealers_id: req.params.id, mileage : condition });
+        const documents = await Cars.find({ dealer_id: req.params.id, mileage : condition });
         res.json(documents);
       } catch (error) {
         res.status(500).json({ error: 'Error fetching dealers by ID' });
@@ -103,7 +119,7 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
         } else {
             condition = { $gt : 80000}
         }
-        const documents = await Cars.find({ dealers_id: req.params.id, price : condition });
+        const documents = await Cars.find({ dealer_id: req.params.id, price : condition });
         res.json(documents);
         } catch (error) {
         res.status(500).json({ error: 'Error fetching dealers by ID' });
@@ -112,7 +128,7 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
 
 app.get('/carsbyyear/:id/:year', async (req, res) => {
     try {
-    const documents = await Cars.find({ dealers_id: req.params.id, year : { $gte :req.params.year }});
+    const documents = await Cars.find({ dealer_id: req.params.id, year : { $gte :req.params.year }});
         res.json(documents);
     } catch (error) {
     res.status(500).json({ error: 'Error fetching dealers by ID' });

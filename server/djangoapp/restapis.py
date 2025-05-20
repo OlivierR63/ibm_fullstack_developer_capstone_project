@@ -31,7 +31,7 @@ def get_request(endpoint, **kwargs):
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
-        print(f"Raw response: {response.text}")  # Print raw response
+        
          # Check if the response is not empty and is a valid JSON
         if response.text:
             return response.json()
