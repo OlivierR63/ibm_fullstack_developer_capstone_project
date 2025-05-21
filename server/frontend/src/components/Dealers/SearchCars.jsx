@@ -78,8 +78,9 @@ const SearchCars = () => {
         }
 
         if (yearIdx !== 0){
+            console.log(`yearIdx = ${yearIdx} et type de yearIdx = ${typeof(yearIdx)}`);
             let curryear = document.getElementById('year').value;
-            cars = cars.filter(car => car.year === curryear);
+            cars = cars.filter(car => car.year >= curryear);
 
             if (cars.length !== 0){
                 document.getElementById('make').value =cars[0].make;
@@ -127,7 +128,9 @@ const SearchCars = () => {
 
     let SearchCarsByMake = async () => {
         let make = document.getElementById('make').value;
-        dealer_url = dealer_url + "?make=" + make;
+        if(make !== 'all'){
+            dealer_url = dealer_url + "?make=" + make;
+        }
 
         const res = await fetch(dealer_url, {
             method: "GET",
@@ -146,7 +149,10 @@ const SearchCars = () => {
 
     let SearchCarsByModel = async () => {
         let model = document.getElementById('model').value;
-        dealer_url = dealer_url + "?model=" + model;
+        
+        if (model !== 'all'){
+            dealer_url = dealer_url + "?model=" + model;
+        }
 
         const res = await fetch(dealer_url, {
             method: "GET",
@@ -165,7 +171,10 @@ const SearchCars = () => {
 
     let SearchCarsByYear = async () => {
         let year = document.getElementById('year').value;
-        dealer_url = dealer_url + "?year=" + year;
+
+        if (year !== 'all'){
+            dealer_url = dealer_url + "?year=" + year;
+        }
 
         const res = await fetch(dealer_url, {
             method: "GET",
@@ -184,7 +193,10 @@ const SearchCars = () => {
 
     let SearchCarsByMileage = async () => {
         let mileage = document.getElementById('mileage').value;
-        dealer_url = dealer_url + "?mileage=" + mileage;
+        
+        if (mileage !== 'all'){
+            dealer_url = dealer_url + "?mileage=" + mileage;
+        }
 
         const res = await fetch(dealer_url, {
             method: "GET",
@@ -203,7 +215,10 @@ const SearchCars = () => {
 
     let SearchCarsByPrice = async () => {
         let price = document.getElementById('price').value;
-        dealer_url = dealer_url + "?price=" + price;
+        
+        if (price !== 'all'){
+            dealer_url = dealer_url + "?price=" + price;
+        }
 
         const res = await fetch(dealer_url, {
             method: "GET",
@@ -266,7 +281,7 @@ const SearchCars = () => {
                             <option value=''>No data found</option>
                         ):(
                             <>
-                                <option disabled defaultValue> -- All --</option>
+                                <option selected value='all'> -- All --</option>
                                 {makes.map((make, index) => (
                                     <option key={index} value={make}>
                                         {make}
@@ -303,7 +318,7 @@ const SearchCars = () => {
                             <option value=''>No data found</option>
                         ):(
                             <>
-                                <option disabled defaultValue> -- All --</option>
+                                <option selected value='all'> -- All --</option>
                                 {models.map((model, index) => (
                                     <option key={index} value={model}>
                                         {model}

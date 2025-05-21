@@ -21,7 +21,6 @@ mongoose.connect('mongodb://mongo_db:27017/', {dbName: 'dealershipsDB'})
                 await Cars.deleteMany({});
                 const insertedCars = await Cars.insertMany(carsData.cars);
                 console.log(`Initial data inserted: ${insertedCars.length} documents inserted`);
-                console.log('Inserted Cars:', insertedCars);
             }
             catch(error){
                 console.error('Error initializing database:', error);
@@ -53,16 +52,12 @@ app.get('/carsbymake/:id/:make', async (req, res) => {
             return res.status(400).json({ error: 'Missing parameters: id and make are required' });
         }
 
-        console.log(`Selection de la marque : req.params.make = ${make}`);
         const document = await Cars.find({dealer_id: id, make: make});
-
-        console.log(`document trouve = ${document}`);
 
         if (!document || document.length === 0) {
             return res.status(404).json({ error: 'No cars found' });
         }
 
-        console.log(`document jsonnise = ${res.json(document)}`);
         res.json(document);
     } 
     catch(error){
@@ -128,10 +123,32 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
 
 app.get('/carsbyyear/:id/:year', async (req, res) => {
     try {
-    const documents = await Cars.find({ dealer_id: req.params.id, year : { $gte :req.params.year }});
+        const {id, year} = req.params;
+
+        // Verify `id` type
+        const idNumber = parseInt(id, 10);
+        if (isNaN(idNumber)) {
+            return res.status(400).json({ error: 'Invalid id type: id should be a number' });
+        }
+
+        // Verify and convert 'year' type
+        const yearNumber = parseInt(year, 10);
+        if (isNaN(yearNumber)) {
+            return res.status(400).json({ error: 'Invalid year type: year should be a number' });
+        }
+
+        // Additional check for valid year range
+        const currentYear = new Date().getFullYear();
+        if (yearNumber < 1900 || yearNumber > currentYear) {
+            return res.status(400).json({ error: `Invalid year: year should be between 1900 and ${currentYear}` });
+        }
+
+        const documents = await Cars.find({ dealer_id: idNumber, year : { $gte : yearNumber}});
         res.json(documents);
+
     } catch (error) {
-    res.status(500).json({ error: 'Error fetching dealers by ID' });
+        console.error('Error fetching cars by year:', error);
+        res.status(500).json({ error: 'Error fetching dealers by ID' });
     }
 });
 
