@@ -26,18 +26,16 @@ This application simulates a car inventory management platform with:
 
 ## Architecture
 
-
-graph TD
-  Frontend[React Frontend]
-  Backend[Django Backend]
-  Sentiment[Flask Microservice (Sentiment)]
-  Inventory[Node.js Microservice (Inventory)]
-  DB[(Database)]
-  Frontend -->|REST API| Backend
-  Backend -->|REST API| Sentiment
-  Backend -->|REST API| Inventory
-  Inventory --> DB
-  Backend --> DB
+- Frontend[React Frontend]
+- Backend[Django Backend]
+- Sentiment[Flask Microservice (Sentiment)]
+- Inventory[Node.js Microservice (Inventory)]
+- DB[(Database)]
+- Frontend -->|REST API| Backend
+- Backend -->|REST API| Sentiment
+- Backend -->|REST API| Inventory
+- Inventory --> DB
+- Backend --> DB
 
 ## Main Features
 
