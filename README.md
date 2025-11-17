@@ -26,7 +26,7 @@ This application simulates a car inventory management platform with:
 
 ## Architecture
 
-```mermaid
+
 graph TD
   Frontend[React Frontend]
   Backend[Django Backend]
@@ -38,7 +38,6 @@ graph TD
   Backend -->|REST API| Inventory
   Inventory --> DB
   Backend --> DB
-```
 
 ## Main Features
 
